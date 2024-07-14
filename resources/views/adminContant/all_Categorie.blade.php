@@ -29,34 +29,37 @@
     <table class="w-full text-sm text-left rtl:text-right text-blue-100">
         <thead class="text-xs text-white uppercase bg-black ">
             <tr>
-                <th scope="col" class="px-6 py-3">
-                   #
-                </th>
-                <th scope="col" class="px-6 py-3">
-                  Category Name
-                </th>
+                <th scope="col" class="px-6 py-3"> #</th>
+                <th scope="col" class="px-6 py-3"> Category Name</th>
               
-                <th scope="col" class="px-6 py-3">
-                    Action
-                </th>
+                <th scope="col" class="px-6 py-3">  Action </th>
             </tr>
         </thead>
         <tbody>
+
+
+        @forelse($categories as $key => $categorie)
+            
+       
             <tr class="bg-blue-500 border-b border-blue-400">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                 1 
+                 {{$categories->firstItem()+$key}} 
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    {{$categorie->categorie_name}}
                 </td>
                 
                 <td class="px-6 py-4">
                     <a href="#" class="font-medium text-white hover:underline">Edit</a>
                 </td>
             </tr>
-           
+            @empty
+            
+        @endforelse
         </tbody>
     </table>
+
+    {{ $categories->links() }}
 </div>
 
     </div>

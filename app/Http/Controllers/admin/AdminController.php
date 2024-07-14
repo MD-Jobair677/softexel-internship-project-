@@ -23,7 +23,10 @@ class AdminController extends Controller
     function Categorie(){
 
 
-        return view('adminContant.all_Categorie');
+        $categories = Categorie:: where('status','yes')->select(['id','categorie_name','status'])->paginate(3);
+
+    
+        return view('adminContant.all_Categorie',compact('categories'));
     }
 
 

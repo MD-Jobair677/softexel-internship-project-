@@ -24,11 +24,11 @@
     <div class="container mx-auto p-4">
 
 
-        <form class=" mx-auto">
+        <form class=" mx-auto  fromdata" method="post" name="fromdata"  >
             <div class="mb-5">
                 <label for="username-success" class="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">SubCategorie Name</label>
-                <input type="text" id="username-success" class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500" placeholder="Bonnie Green">
-                <p class="mt-2 text-sm text-green-600 dark:text-green-500"><span class="font-medium">Alright!</span> Username available!</p>
+                <input type="text" name="subcategorie_name" id="username-success" class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500 subcategorie_name" placeholder="Bonnie Green">
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500 subcategorie_erorr"></p>
             </div>
             <div>
               
@@ -36,19 +36,27 @@
 
                
              
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select subcategorie</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected>Choose a country</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="FR">France</option>
-                    <option value="DE">Germany</option>
+                <label for="subcategorie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select categorie</label>
+                <select id="subcategorie" name="categorie_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    
+                    <option disabled selected>Select Category</option>
+                    @forelse($allSubCategoris as $key => $allSubCategori)
+                        
+                    <option value="{{$allSubCategori->id}}">{{$allSubCategori->categorie_name}}</option>
+                    @empty
+                          <option >SubCategorie not Found</option>
+
+                    @endforelse
+
+
+                  
+                   
                 </select>
                 
 
 
 
-                <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium">Oops!</span> Username already taken!</p>
+                <p class="mt-2 text-sm text-red-600 dark:text-red-500 categorie_error"></p>
             </div>
 
             <button type="submit" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">Add</button>
@@ -62,3 +70,92 @@
 
 </div>
 @endsection
+@push('customjs')
+
+<script>
+    $(document).ready(function() {
+
+        $('.fromdata').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this);
+            $.ajax({
+                url: "{{route('admin.store.subcategorie')}}"
+                , type: 'POST'
+                , data: formData.serializeArray(),
+
+
+
+
+                dataType: 'json',
+
+                success: function(response) {
+                     {{-- console.log(response) --}}
+
+
+                    if (response.status == false) {
+
+                               
+
+                        if (response.erorrs.subcategorie_name != null) {
+
+                            $('.subcategorie_name').addClass('bg-red-50 border border-red-500 text-red-900 placeholder-red-700')
+                            $('.subcategorie_erorr').html(response.erorrs.subcategorie_name)
+                        } else {
+
+                            $('.subcategorie_name').removeClass('bg-red-50 border border-red-500 text-red-900 placeholder-red-700')
+                            $('.subcategorie_erorr').html('')
+                        }
+
+                        if (response.erorrs.categorie_id != null) {
+
+                            
+                            $('.categorie_error').html(response.erorrs.categorie_id)
+                        } else {
+
+                            
+                            $('.categorie_error').html('')
+                        }
+
+
+
+                       
+
+
+
+                    } else {
+
+                        $('.subcategorie_name').removeClass('bg-red-50 border border-red-500 text-red-900 placeholder-red-700')
+                        $('.subcategorie_name').html('')
+
+                        $('.categorie_error').html('')
+
+
+                        Toast.fire({
+                            icon: "success"
+                            , title: response.message
+                        });
+
+
+
+                    }
+
+
+
+
+
+                }
+
+
+
+
+            })
+        })
+
+
+
+
+    })
+
+</script>
+@endpush
+

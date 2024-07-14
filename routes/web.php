@@ -58,6 +58,9 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
         Route::get('/all-subcategorie','allSubcategorie')->name('all.subcategorie');
         Route::get('/create-subcategorie','createSubCategorie')->name('create.subcategorie');
 
+
+        Route::post('/store-subcategorie','storeSubCategorie')->name('store.subcategorie');
+
     });
 
 
