@@ -1,5 +1,7 @@
 @extends('adminContant.adminLayout.adminlLayout')
-
+@section('title')
+allCategorie
+@endsection
 
 @section('contant')
     <div class="max-w-2xl p-6 bg-white border  border-gray-200 rounded-lg">

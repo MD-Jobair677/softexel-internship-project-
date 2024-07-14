@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,6 +13,8 @@ class HomeController extends Controller
 
     public function HomePage(){
 
-        return view('HomeContant.Home');
+        $Categorie = Categorie::with('subcategorie')->get();
+        $Products = Product::select(['id','product_name','product_image','product_price','slug'])->paginate(6);
+        return view('HomeContant.Home',compact('Categorie','Products'));
     }
 }

@@ -15,4 +15,13 @@ class Categorie extends Model
         return $this->hasMany(Subcategorie::class);
 
     }
+
+    public function product(){
+
+        return $this->hasMany(Product::class);
+
+    }
+
+
+
 }

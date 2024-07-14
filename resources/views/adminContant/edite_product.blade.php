@@ -8,7 +8,7 @@ Create Product
 
     <div class="flex justify-between ">
         <div>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Add Product</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Edite Product</h5>
         </div>
 
         @if(session('success'))
@@ -29,13 +29,13 @@ Create Product
     <div class="container mx-auto p-4">
 
 
-        <form action="{{route('admin.store.product')}}" class=" mx-auto" method="post" enctype="multipart/form-data">
+        <form action="{{route('admin.update.product',$Product->id)}}" class=" mx-auto" method="post" enctype="multipart/form-data">
 
             @csrf
-            @method('post')
+            @method('put')
             <div class="mb-5">
                 <label for="username-success" class="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Product Name Name</label>
-                <input type="text" name="product_name" value="{{ old('product_name') }}" id="username-success" class=" border text-green-900 dark:text-green-400 placeholder-green-700text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500" placeholder="Product Name">
+                <input type="text" name="product_name" value="{{$Product->product_name }}" id="username-success" class=" border text-green-900 dark:text-green-400 placeholder-green-700text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500" placeholder="Product Name">
                 @error('product_name')
 
                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -47,7 +47,7 @@ Create Product
             </div>
             <div class="mb-5">
                 <label for="username-success" class="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Product Price</label>
-                <input type="number" name="product_price" value="{{ old('product_price') }}" id="username-success" class=" border-500  text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 " placeholder="Enter Product Price">
+                <input type="number" name="product_price" value="{{$Product->product_price }}" id="username-success" class=" border-500  text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 " placeholder="Enter Product Price">
                 @error('product_price')
 
                 <p class="mt-2 text-sm text-red-600 dark:text-red-500">{{ $message }}</p>
@@ -59,6 +59,7 @@ Create Product
 
             <div class="mb-5">
 
+                    <img src="{{asset('storage/productimage/'.$Product->product_image)}}" alt="product image">
 
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload iamge</label>
                 <input name="product_image" value="{{ old('product_image') }}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="file_input" type="file">
@@ -84,15 +85,15 @@ Create Product
 
                 <label for="categorie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select Categorie</label>
                 <select name="categorie_id" id="categorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 select">
-                    <option disabled selected>Choose a Categorie</option>
-                    @forelse($Categories as $key => $Categorie)
+                    
+                    @forelse($Categories as $Categorie)
 
 
 
 
 
 
-                    <option value="{{$Categorie->id}}">{{$Categorie->categorie_name}}</option>
+                    <option  {{$Categorie->id ==$Product->categorie_id ? 'selected':''}}     value="{{$Categorie->id}}">{{$Categorie->categorie_name}}</option>
 
 
                     @empty
@@ -112,8 +113,33 @@ Create Product
 
                 <label for="subcategorie" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select SubCategorie</label>
                 <select name="subcategorie_id" id="subcategorie" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500    ">
-                    <option disabled selected>Select SubCategory</option>
+                   
+
+                     @forelse($Categories as  $Categorie)
+
+
+                        @foreach($Categorie->subcategorie as $subcategorie)
+
+                        <option {{$subcategorie->id == $Product->subcategorie_id ? 'selected' :'' }} value="{{$subcategorie->id }}" >  {{$subcategorie->subcategorie_name}} </option>
+                           
+                        @endforeach
+
+
+
+                    
+
+
+                    @empty
+                    <option disabled selected>Categorie not found</option>
+
+                    @endforelse
+
+
+
+
                 </select>
+
+
 
                 @error('subcategorie_id')
 
@@ -122,7 +148,7 @@ Create Product
                 @enderror
             </div>
 
-            <button type="submit" class="text-white my-2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Add</button>
+            <button type="submit" class="text-white my-2 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Update</button>
         </form>
 
 

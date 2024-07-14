@@ -61,6 +61,9 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
 
         Route::post('/store-subcategorie','storeSubCategorie')->name('store.subcategorie');
 
+
+       
+
     });
 
 
@@ -79,8 +82,15 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
         Route::get('/create-product','createProduct')->name('create.product');
         Route::post('/store-product','storeProduct')->name('store.product');
 
+
+        Route::get('/edite-product/{id}','editeProduct')->name('edite.product');
+        Route::put('/update-product/{id}','updateProduct')->name('update.product');
+
+
         // SELECT SUBCATEGORY WHEN CHANGE CATEGORIE
         Route::get('/select-categorie','selectCategorie')->name('select.categorie');
+       
+
         
 
 

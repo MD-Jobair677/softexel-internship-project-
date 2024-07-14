@@ -1,6 +1,8 @@
 @extends('adminContant.adminLayout.adminlLayout')
 
-
+@section('title')
+dashbord
+@endsection
 @section('contant')
     <div class="p-4">
         <!-- Your content goes here -->

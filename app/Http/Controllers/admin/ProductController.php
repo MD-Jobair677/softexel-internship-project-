@@ -17,7 +17,11 @@ class ProductController extends Controller
     use Traits;
     // ALL PRODUCT
     function allProduct(){
-        return view('adminContant.all_product');
+
+        $Products = Product::with('categorie')->with('subcategorie')->paginate(5);
+
+        // dd($Products);
+        return view('adminContant.all_product',compact('Products'));
     }
 
 
@@ -82,6 +86,70 @@ class ProductController extends Controller
         return $subcategorie;
             
         }
+
+
+        // EDITE PRODUCT
+
+        function editeProduct(Request $request, $id){
+            $Categories = Categorie::with('subcategorie') ->get(); 
+
+               $Product = Product::find($id) ;
+
+            //    dd($Categories);
+
+            return view('adminContant.edite_product',compact('Categories','Product'));
+        }
+
+        // UPDATE PRODUCT
+
+        function updateProduct(Request $request,$id){
+
+            
+
+
+            $request->validate([
+                'product_name' => 'required|string|max:255',
+                'product_image' => 'required|image|mimes:jpeg,png,jpg|max:2048', 
+                'product_price' => 'required|numeric|min:0',
+                'categorie_id' => 'required',
+                'subcategorie_id' => 'required',
+            ]); 
+            
+            
+            $slugname = $request->product_name;
+        
+            $slug = Str::slug(Product::class,$slugname);
+            if($request->hasFile('product_image')){
+                $updateProduct = Product::find($id);
+
+                // $filePath = storage_path('storage/productimage/'.$updateProduct->product_image);
+                // unlink($filePath);
+
+
+
+                $imagename = str::uuid()->toString().'-'.$request->title.'.'.$request->product_image->extension();
+                $request->product_image->storeAs('productimage',$imagename,'public');
+    
+    
+                
+                $updateProduct->product_name = $request->product_name;
+                $updateProduct->slug = $slug ;
+                $updateProduct->product_image = $imagename ;
+                $updateProduct->product_price = $request->product_price ;
+                $updateProduct->categorie_id = $request->categorie_id ;
+                $updateProduct->subcategorie_id = $request->subcategorie_id;
+                $updateProduct->save();
+                //  $products =  Product::latest()->paginate(50);
+                  return back()->with('success','successfully added product' );
+                
+            }
+
+            
+            
+
+        }
+
+
 
 
 }

@@ -6,7 +6,9 @@
      <link href="./output.css" rel="stylesheet">
      @vite(['resources/css/app.css','resources/js/app.js'])
 
+     <title> @yield('title') </title>
 
+     <script src="https://kit.fontawesome.com/1159b8e81c.js" crossorigin="anonymous"></script>
      <style>
          body {
              padding-top: 78px;
@@ -34,11 +36,21 @@
              <!-- Profile Dropdown -->
              <div class="relative">
                  <button id="profile-button" class="flex items-center focus:outline-none">
-                     <img class="h-8 w-8 rounded-full" src="https://via.placeholder.com/150" alt="Profile">
+                     <img class="h-8 w-8 rounded-full" src="https://api.dicebear.com/9.x/big-ears-neutral/svg?seed=" .{{auth()->user()->name}} alt="Profile">
                  </button>
                  <div id="dropdown-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
                      <a href="#" class="block px-4 py-2 text-sm text-gray-700">{{auth()->user()->name}}</a>
                      <a href="#" class="block px-4 py-2 text-sm text-gray-700">{{auth()->user()->email}}</a>
+
+                     @role('admin')
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700">admin</a>
+                     @endrole
+                     
+                     @role('writter')
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700">writter</a>
+                     @endrole
+                     
+
                      <div class="border-t border-gray-100"></div>
 
 
@@ -214,9 +226,6 @@
              toast.onmouseleave = Swal.resumeTimer;
          }
      });
-
-
-    
 
  </script>
  @stack('customjs')
