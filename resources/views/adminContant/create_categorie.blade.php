@@ -110,6 +110,7 @@
 
                         $('.categorie_name').removeClass('bg-red-50 border border-red-500 text-red-900 placeholder-red-700')
                         $('.categorie_erorr').html('')
+                         $('input[name="categorie"]').val('');
 
                         Toast.fire({
                             icon: "success"

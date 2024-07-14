@@ -27,7 +27,7 @@
         <form class=" mx-auto  fromdata" method="post" name="fromdata"  >
             <div class="mb-5">
                 <label for="username-success" class="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">SubCategorie Name</label>
-                <input type="text" name="subcategorie_name" id="username-success" class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500 subcategorie_name" placeholder="Bonnie Green">
+                <input type="text" name="subcategorie_name" id="username-success" class="bg-green-50 border border-green-500 text-green-900 dark:text-green-400 placeholder-green-700 dark:placeholder-green-500 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-green-500 subcategorie_name" placeholder=" Enter SubCategorie Name">
                 <p class="mt-2 text-sm text-red-600 dark:text-red-500 subcategorie_erorr"></p>
             </div>
             <div>
@@ -128,6 +128,8 @@
                         $('.subcategorie_name').html('')
 
                         $('.categorie_error').html('')
+
+                        $('input[name="subcategorie_name"]').val('');
 
 
                         Toast.fire({

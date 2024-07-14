@@ -77,6 +77,14 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
         
         Route::get('/all-product','allProduct')->name('all.product');
         Route::get('/create-product','createProduct')->name('create.product');
+        Route::post('/store-product','storeProduct')->name('store.product');
+
+        // SELECT SUBCATEGORY WHEN CHANGE CATEGORIE
+        Route::get('/select-categorie','selectCategorie')->name('select.categorie');
+        
+
+
+
 
     });
 

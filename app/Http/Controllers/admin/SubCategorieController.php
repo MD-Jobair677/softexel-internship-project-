@@ -18,9 +18,9 @@ class SubCategorieController extends Controller
 
     function allSubcategorie (){
 
-        
-
-        return view('adminContant.all_subcategorie');
+            $allsubcategories = Subcategorie::with('categorie')->paginate(4);
+            
+        return view('adminContant.all_subcategorie',compact('allsubcategories'));
 
     }
 
@@ -50,7 +50,7 @@ class SubCategorieController extends Controller
             $subcategory= new Subcategorie();
             $subcategory->subcategorie_name = $request->subcategorie_name;
             $subcategory->categorie_id = $request->categorie_id;
-            $subcategory->slug = $this->slug(Categorie::class,$request->subcategorie_name);
+            $subcategory->slug = $this->slug(Subcategorie::class,$request->subcategorie_name);
             
             
             $subcategory->save();

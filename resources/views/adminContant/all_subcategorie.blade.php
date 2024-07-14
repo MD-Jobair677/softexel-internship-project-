@@ -45,24 +45,35 @@
             </tr>
         </thead>
         <tbody>
+
+        @forelse($allsubcategories as $key => $allsubcategorie)
+            
+
+
             <tr class="bg-blue-500 border-b border-blue-400">
                 <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                 1 
+                 {{$allsubcategories->firstItem()+$key}}
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    {{$allsubcategorie->subcategorie_name}}
                 </td>
                 <td class="px-6 py-4">
-                    Silver
+                   {{$allsubcategorie->categorie->categorie_name}}
                 </td>
                 
                 <td class="px-6 py-4">
                     <a href="#" class="font-medium text-white hover:underline">Edit</a>
                 </td>
             </tr>
-           
+            @empty
+
+            <h1>Nop Categorie found</h1>
+            
+        @endforelse
         </tbody>
     </table>
+
+    {{$allsubcategories->links()}}
 </div>
 
     </div>
