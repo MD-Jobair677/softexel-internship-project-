@@ -9,6 +9,23 @@ class AdminController extends Controller
 {
     public function dasbord(){
 
+        return view('adminContant.admin_dasbord');
+    }
+
+    // ALL CATEGORIE
+
+    function Categorie(){
+
+
         return view('adminContant.Categorie');
+    }
+
+
+    // CREATE CTEAGORIE
+
+    function createCategorie(){
+
+
+            return view('adminContant.create_categorie');
     }
 }

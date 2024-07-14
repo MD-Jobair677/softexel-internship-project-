@@ -31,11 +31,16 @@ Route::get('/',[HomeController::class,'HomePage'])->name("home.page");
 
 Route::group(['middleware' => ['role:admin|writter']], function () { 
 
-    Route::prefix('/admin')->controller(AdminController::class)->name('admin.')->group(function(){
+    Route::prefix('/dashbord/admin')->controller(AdminController::class)->name('admin.')->group(function(){
 
-        Route::get('/dashbord','dasbord')->name('dashbord');
+        Route::get('','dasbord')->name('dashbord');
+        Route::get('/all-categorie','Categorie')->name('categorie');
+        Route::get('/create-categorie','createCategorie')->name('create.categorie');
 
     });
 
 
  });
+
+
+//  
