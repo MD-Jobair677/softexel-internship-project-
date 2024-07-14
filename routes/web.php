@@ -37,7 +37,9 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
 
         Route::get('','dasbord')->name('dashbord');
         Route::get('/all-categorie','Categorie')->name('categorie');
+
         Route::get('/create-categorie','createCategorie')->name('create.categorie');
+        Route::post('/store-categorie','storeCategorie')->name('store.categorie');
 
     });
 
