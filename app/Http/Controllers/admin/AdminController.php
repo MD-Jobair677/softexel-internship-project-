@@ -17,7 +17,7 @@ class AdminController extends Controller
     function Categorie(){
 
 
-        return view('adminContant.Categorie');
+        return view('adminContant.all_Categorie');
     }
 
 

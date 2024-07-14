@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\SubCategorieController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,4 +45,37 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
  });
 
 
-//  
+//  SUBCATEGORIE 
+
+
+Route::group(['middleware' => ['role:admin|writter']], function () { 
+
+    Route::prefix('/dashbord/admin')->controller(SubCategorieController::class)->name('admin.')->group(function(){
+
+        
+        Route::get('/all-subcategorie','allSubcategorie')->name('all.subcategorie');
+        Route::get('/create-subcategorie','createSubCategorie')->name('create.subcategorie');
+
+    });
+
+
+ });
+
+
+//  PRODUCT
+
+
+Route::group(['middleware' => ['role:admin|writter']], function () { 
+
+    Route::prefix('/dashbord/admin')->controller(ProductController::class)->name('admin.')->group(function(){
+
+        
+        Route::get('/all-product','allProduct')->name('all.product');
+        Route::get('/create-product','createProduct')->name('create.product');
+
+    });
+
+
+ });
+
+
