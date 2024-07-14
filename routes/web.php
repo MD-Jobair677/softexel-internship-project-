@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SubCategorieController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\myaccount\MyAcountController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -97,6 +98,35 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
 
 
     });
+
+
+ });
+
+
+//  MY ACCOUNT
+
+
+Route::group(['middleware' => 'auth'], function () { 
+
+    Route::prefix('/myaccount')->controller(MyAcountController::class)->name('profile.')->group(function(){
+
+        
+       Route::get('','myAccount')->name('account');
+       Route::get('/order','myOrder')->name('myorder');
+       
+
+
+    //    PROCOCESS CHUCKOUT
+
+    Route::get('/processtocheckout/{id}','processToCheckout')->name('processtocheckout');
+        
+
+
+
+
+    });
+
+
 
 
  });
