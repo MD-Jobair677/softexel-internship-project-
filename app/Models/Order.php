@@ -21,5 +21,10 @@ class Order extends Model
         return $this->belongsTo(Product::class);
 
     }
+    public function useraddresse(){
+
+        return $this->belongsTo(Useraddresse::class);
+
+    }
 
 }

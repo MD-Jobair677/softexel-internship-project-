@@ -18,4 +18,14 @@ class Useraddresse extends Model
          'city',
          'zip_code',
     ];
+
+    public function order(){
+
+        return $this->hasMany(Order::class);
+
+    }
+
+
+
+    
 }

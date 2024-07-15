@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Models\Product;
 use App\Models\Categorie;
+use App\Models\Order;
 use App\Http\Traits\Traits;
 use Illuminate\Support\Str;
 use App\Models\Subcategorie;
@@ -146,6 +147,19 @@ class ProductController extends Controller
 
             
             
+
+        }
+
+
+        
+        // SHOW ALL ORFDER ONLY ADMIN
+
+        function showAllOrder(){
+
+                $allOrders = Order::with('product')->with('useraddresse')->with('user')->paginate(5);
+
+                // dd($allOrders);
+            return view('adminContant.show_all_order',compact('allOrders'));
 
         }
 

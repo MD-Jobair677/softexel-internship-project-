@@ -91,7 +91,7 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
         // SELECT SUBCATEGORY WHEN CHANGE CATEGORIE
         Route::get('/select-categorie','selectCategorie')->name('select.categorie');
        
-
+       
         
 
 
@@ -101,6 +101,28 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
 
 
  });
+
+
+//  SHOW ORDER ONLY ADMIN
+
+
+Route::group(['middleware' => ['role:admin']], function () { 
+
+    Route::prefix('/dashbord/admin')->controller(ProductController::class)->name('admin.')->group(function(){
+
+        Route::get('/show-all-order','showAllOrder')->name('all.order');
+       
+       
+        
+
+
+
+
+    });
+
+
+ });
+
 
 
 //  MY ACCOUNT
