@@ -23,7 +23,7 @@ your order
                 <table class="min-w-full bg-white">
                     <thead>
                         <tr>
-                            <th class="w-1/6 py-2">Order ID</th>
+                            <th class="w-1/6 py-2">Tansectoin Id</th>
                             <th class="w-1/6 py-2">Product Image</th>
                             <th class="w-1/3 py-2">Product Name</th>
                             <th class="w-1/6 py-2">Price</th>
@@ -31,21 +31,63 @@ your order
                         </tr>
                     </thead>
                     <tbody>
+
+
+                        @forelse($UserOrders as $key => $UserOrder)
+
+
+
+
                         <!-- Example order row -->
                         <tr class="border-b">
-                            <td class="py-2 px-4">12345</td>
+                            <td class="py-2 px-4">{{$UserOrder->id}}</td>
+
+
+                           
                             <td class="py-2 px-4">
-                                <img class="w-16 h-16 object-cover" src="https://via.placeholder.com/100" alt="Product Image">
+                                <img class="w-16 h-16 object-cover" src="{{asset('storage/productimage/'.$UserOrder->product->product_image)}}" alt="Product Image">
                             </td>
-                            <td class="py-2 px-4">Product Name Example</td>
-                            <td class="py-2 px-4">$50.00</td>
-                            <td class="py-2 px-4">
-                                <span class="text-green-500">Shipped</span>
+
+                            
+
+                            <td class="py-2 px-4">{{$UserOrder->product->product_name}}</td>
+                            <td class="py-2 px-4">${{number_format($UserOrder->product->product_price)}}</td>
+
+                                @if($UserOrder->product->status=='pending')
+                                    <td class="py-2 px-4">
+                                <span class="text-green-500">pending</span>
                             </td>
+
+                                @elseif($UserOrder->product->status=='shipped')
+                                     <td class="py-2 px-4">
+                                <span class="text-green-500">shipped</span>
+                            </td>
+                                @else
+                                     <td class="py-2 px-4">
+                                <span class="text-green-500">delivered</span>
+                            </td>
+                                
+
+                                @endif
+
+                            
+
+
+
+
                         </tr>
+
+                        @empty
+
+
+                        <h1>Order Not Found</h1>
+                        @endforelse
+
                         <!-- Add more rows as needed -->
                     </tbody>
                 </table>
+
+                {{$UserOrders->links()}}
             </div>
         </div>
 
@@ -54,9 +96,9 @@ your order
 
 
     </div>
-    <div class="mt-4">
-        <button class="bg-green-500 text-white px-4 py-2 rounded">View All Orders</button>
-    </div>
+    
 </div>
+
+
 
 @endsection

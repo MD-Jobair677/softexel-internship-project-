@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use App\Models\Categorie;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -11,7 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        view()->composer('HomeContant.layout.homeLayout', function ($view) {
+            $view->with('Categorie',Categorie::with('subcategorie')->latest()->get());
+        
+        });
     }
 
     /**
@@ -19,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        
     }
 }

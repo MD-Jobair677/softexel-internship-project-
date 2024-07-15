@@ -21,7 +21,14 @@ class MyAcountController extends Controller
 
     // MY ORDER
     function myOrder(){
-         return view('HomeContant.MyAccountContant.order');
+
+        $UserOrders= Order::where('user_id',auth()->user()->id)->with('product')->paginate(5);
+
+        // foreach($UseOrders->product as $product){
+        //         dd($product->id);
+        // }
+
+         return view('HomeContant.MyAccountContant.order',compact('UserOrders'));
     }
     
 
