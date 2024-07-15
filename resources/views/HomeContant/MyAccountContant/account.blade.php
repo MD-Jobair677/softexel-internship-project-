@@ -7,11 +7,11 @@
     <h2 class="text-2xl font-semibold mb-4">Profile Details</h2>
     <div class="mb-4">
         <label class="block text-gray-700">Name</label>
-        <input type="text" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="John Doe">
+        <input type="text" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="{{auth()->user()->name}}">
     </div>
     <div class="mb-4">
         <label class="block text-gray-700">Email</label>
-        <input type="email" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="johndoe@example.com">
+        <input type="email" class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent" value="{{auth()->user()->email}}">
     </div>
     <div class="mb-4">
         <label class="block text-gray-700">Phone</label>

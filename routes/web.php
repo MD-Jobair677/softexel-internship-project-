@@ -120,7 +120,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/processtocheckout/{id}','processToCheckout')->name('processtocheckout');
         
+    
+    // STORE USER ADDDRESS AND checkout
 
+    Route::post('/chuckout','Checkout')->name('checkout');
+
+    
 
 
 
