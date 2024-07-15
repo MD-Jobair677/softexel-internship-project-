@@ -88,6 +88,10 @@ Route::group(['middleware' => ['role:admin|writter']], function () {
         Route::put('/update-product/{id}','updateProduct')->name('update.product');
 
 
+
+        Route::delete('/delete-product/{id}','delete')->name('delete.product');
+
+
         // SELECT SUBCATEGORY WHEN CHANGE CATEGORIE
         Route::get('/select-categorie','selectCategorie')->name('select.categorie');
        

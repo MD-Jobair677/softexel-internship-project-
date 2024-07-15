@@ -9,7 +9,7 @@ all product
 
     <div class="flex justify-between ">
         <div>
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">All Product</h5>
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">All Order</h5>
         </div>
 
         <div>

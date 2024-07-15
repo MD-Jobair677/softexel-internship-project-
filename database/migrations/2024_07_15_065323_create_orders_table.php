@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('product_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('useraddresse_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
            $table->integer('product_price');
-           $table->integer('product_price');
+           
            $table->enum('status',['pending','shipped','delivered'])->default('pending');
             $table->timestamps();
         });

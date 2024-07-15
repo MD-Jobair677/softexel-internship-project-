@@ -17,9 +17,25 @@ class ProductController extends Controller
 
     use Traits;
     // ALL PRODUCT
-    function allProduct(){
+    function allProduct(Request $request){
 
-        $Products = Product::with('categorie')->with('subcategorie')->paginate(5);
+
+        if($request->keyword){
+
+            $Products= Product::where('product_name','Like','%'.$request->keyword.'%')
+            
+             ->paginate(5);
+            
+           
+
+        }else{
+            $Products = Product::with('categorie')->with('subcategorie')->paginate(5);
+           
+        };
+
+       
+
+        
 
         // dd($Products);
         return view('adminContant.all_product',compact('Products'));
@@ -160,6 +176,18 @@ class ProductController extends Controller
 
                 // dd($allOrders);
             return view('adminContant.show_all_order',compact('allOrders'));
+
+        }
+
+        //  DELETE PRODUCT
+
+        function delete($id){
+
+            $delete = Product::findOrFail($id);
+            $delete->delete();
+            return back();
+
+
 
         }
 
